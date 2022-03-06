@@ -4,3 +4,4 @@ Repositorio del proyecto "Aplicativo de Asistencia Para Personas con Discapacida
 
 ## Integrantes:
 - Sergio Del Carpio
+- Marco Mamani Arapa
