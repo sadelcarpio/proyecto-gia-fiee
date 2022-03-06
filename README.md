@@ -7,3 +7,4 @@ Repositorio del proyecto "Aplicativo de Asistencia Para Personas con Discapacida
 - Sergio Del Carpio
 - Marco Mamani Arapa
 - Jean Vargas
+- Nicolás Silva
