@@ -5,4 +5,4 @@ Repositorio del proyecto "Aplicativo de Asistencia Para Personas con Discapacida
 ## Integrantes:
 
 - Sergio Del Carpio
-- Jean Carlos Vargas
+- Jean Vargas
