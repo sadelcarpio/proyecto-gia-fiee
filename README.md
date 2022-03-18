@@ -8,3 +8,4 @@ Repositorio del proyecto "Aplicativo de Asistencia Para Personas con Discapacida
 - Marco Mamani Arapa
 - Jean Vargas
 - Nicolás Silva
+- David Santa Maria Zavaleta
