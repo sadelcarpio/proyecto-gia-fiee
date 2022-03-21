@@ -9,3 +9,4 @@ Repositorio del proyecto "Aplicativo de Asistencia Para Personas con Discapacida
 - Jean Vargas
 - Nicolás Silva
 - David Santa Maria Zavaleta
+- Saccaco Maldonado Antony
