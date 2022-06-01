@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_gia_fiee/providers/camera_provider.dart';
 import 'package:proyecto_gia_fiee/screens/money/money.dart';
 import 'package:proyecto_gia_fiee/screens/objects/objects.dart';
 import 'package:proyecto_gia_fiee/screens/persons/persons.dart';
 import 'package:proyecto_gia_fiee/screens/text/text.dart';
-
-import '../providers/cameraProvider.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);

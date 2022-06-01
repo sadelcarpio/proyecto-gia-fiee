@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_gia_fiee/providers/cameraProvider.dart';
+import 'package:proyecto_gia_fiee/providers/camera_provider.dart';
 import 'package:proyecto_gia_fiee/screens/navigation.dart';
 
 void main() async {
