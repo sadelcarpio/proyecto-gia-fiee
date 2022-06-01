@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +8,8 @@ import 'package:proyecto_gia_fiee/screens/persons/persons.dart';
 import 'package:proyecto_gia_fiee/screens/text/text.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({Key? key}) : super(key: key);
+  final List<CameraDescription> cameras;
+  const NavigationPage({Key? key, required this.cameras}) : super(key: key);
 
   @override
   State<NavigationPage> createState() => _NavigationPageState();
@@ -66,7 +68,7 @@ class _NavigationPageState extends State<NavigationPage>
           controller: tabController,
           // Aquí irían las diferentes páginas pero solo hay un logo
           children: [
-            ObjectsRecognitionPage(),
+            ObjectsRecognitionPage(cameras: widget.cameras),
             TextRecognitionPage(),
             MoneyRecognitionPage(),
             PersonRecognitionPage(),
@@ -81,9 +83,7 @@ class _NavigationPageState extends State<NavigationPage>
     return Container(
       height: 100,
       width: screenWidth,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-          color: Color(0xff5069EB)),
+      decoration: const BoxDecoration(color: Color(0xff5069EB)),
       child: IgnorePointer(
         child: TabBar(
           isScrollable: true,
