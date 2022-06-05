@@ -1,6 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_gia_fiee/providers/camera_provider.dart';
 import 'package:proyecto_gia_fiee/screens/money/money.dart';
 import 'package:proyecto_gia_fiee/screens/objects/objects.dart';
 import 'package:proyecto_gia_fiee/screens/persons/persons.dart';
@@ -19,11 +22,17 @@ class _NavigationPageState extends State<NavigationPage>
     with TickerProviderStateMixin {
   late TabController tabController;
   late int selectedTab;
+  late CameraController cameraController;
+  late Future<void> initializeControllerFuture;
   final List<String> screenNames = ['Objetos', 'Texto', 'Dinero', 'Personas'];
   @override
   // el método init (inicializar estado)
   void initState() {
     super.initState();
+    CameraProvider cameraProvider = context.read<CameraProvider>();
+    cameraController =
+        CameraController(cameraProvider.camera, ResolutionPreset.medium);
+    initializeControllerFuture = cameraController.initialize();
     SemanticsService.announce(
         'Bienvenido, desplázate entre las pestañas para descubrir las funciones de la aplicación',
         TextDirection.ltr);
@@ -50,6 +59,7 @@ class _NavigationPageState extends State<NavigationPage>
   void dispose() {
     // En caso se tenga una página no relacionada al TabBar, esto asegura que se desheche correctamente
     tabController.dispose();
+    cameraController.dispose();
     super.dispose();
   }
 
@@ -61,17 +71,37 @@ class _NavigationPageState extends State<NavigationPage>
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: menu(screenWidth),
-        body: TabBarView(
-          // Las vistas de cada Tab
-          controller: tabController,
-          // Aquí irían las diferentes páginas pero solo hay un logo
-          children: [
-            ObjectsRecognitionPage(),
-            TextRecognitionPage(),
-            MoneyRecognitionPage(),
-            PersonRecognitionPage(),
-          ],
-        ),
+        body: Stack(children: [
+          Column(
+            children: [
+              Expanded(
+                child: FutureBuilder<void>(
+                  future: initializeControllerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return CameraPreview(cameraController);
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+          TabBarView(
+            // Las vistas de cada Tab
+            controller: tabController,
+            // Aquí irían las diferentes páginas pero solo hay un logo
+            children: const [
+              ObjectsRecognitionPage(),
+              TextRecognitionPage(),
+              MoneyRecognitionPage(),
+              PersonRecognitionPage(),
+            ],
+          ),
+        ]),
       ),
     );
   }
@@ -81,9 +111,7 @@ class _NavigationPageState extends State<NavigationPage>
     return Container(
       height: 100,
       width: screenWidth,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-          color: Color(0xff5069EB)),
+      decoration: const BoxDecoration(color: Color(0xff5069EB)),
       child: IgnorePointer(
         child: TabBar(
           isScrollable: true,
